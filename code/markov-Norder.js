@@ -71,7 +71,10 @@ function setnstep(x){
     markov.nstep= x;
 }
 
+function setMarkovLength(x){
+    markov.markovLength= x;
 
+}
 
 
 
