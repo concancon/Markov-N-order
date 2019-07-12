@@ -167,7 +167,7 @@ describe('Markov_N-order_Algorithm', function () {
 
             });
         });
-       describe('Markov Chain Generation', function () {
+        describe('Markov Chain Generation', function () {
             describe('generate ', function () {
                 const markov = new NorderLib.MarkovN();
                 before(function () {
@@ -176,7 +176,10 @@ describe('Markov_N-order_Algorithm', function () {
                     notelist.push("57,16,120");
                     notelist.push("57,16,30");
                     notelist.push("57,16,10");
-                    markov.order = 2;
+                    notelist.push("58,16,20");
+
+
+                    markov.order = 3;
                     markov.markovLength = 64;
                     markov.createMarkov(notelist);
                     markov.generate();
@@ -184,11 +187,12 @@ describe('Markov_N-order_Algorithm', function () {
                 });
 
 
-                it(' generates Markov chain according to ruleset given "higher" order ', function () {
+                it(' generates Markov chain according to ruleset given "higher" order (order 3) ', function () {
 
-                    assert.equal(markov.markObj['57,16,120,57,16,30'], '57,16,10');
-                    assert.equal(markov.markObj['57,16,10,57,16,120'], '57,16,30');
-
+                    assert.equal(markov.markObj['57,16,120,57,16,30,57,16,10'], '58,16,20');
+                    assert.equal(markov.markObj['57,16,30,57,16,10,58,16,20'], '57,16,120');
+                    assert.equal(markov.markObj['57,16,10,58,16,20,57,16,120'], '57,16,30');
+                    assert.equal(markov.markObj['58,16,20,57,16,120,57,16,30'], '57,16,10');
 
                 });
 
