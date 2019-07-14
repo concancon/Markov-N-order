@@ -33,10 +33,19 @@ function MarkovN() {
             if (i === (noteList.length - this.order)) {
 
                 this.markObj[(noteList.slice(noteList.length - (this.order)))] = [];
-                for (var r = 0; r < this.order - 1; r++) {
-                    this.markObj[(noteList.slice(noteList.length - (this.order - (r + 1))).concat(noteList.slice(0, (r + 1))))] = [];
-                    this.markObj[(noteList.slice(noteList.length - (this.order - (r + 1))).concat(noteList.slice(0, (r + 1))))].push(noteList[r + 1]);
-                }
+
+               if(this.order === 1){
+
+                   this.markObj[gram].push(noteList[0]);
+
+               }
+                else {
+
+                   for (var r = 0; r < this.order - 1; r++) {
+                       this.markObj[(noteList.slice(noteList.length - (this.order - (r + 1))).concat(noteList.slice(0, (r + 1))))] = [];
+                       this.markObj[(noteList.slice(noteList.length - (this.order - (r + 1))).concat(noteList.slice(0, (r + 1))))].push(noteList[r + 1]);
+                   }
+               }
 
                 this.markObj[gram].push(noteList[0]);
                 //this.markObj[noteList.slice(noteList.length-this.order).push( noteList[0])];
@@ -52,11 +61,9 @@ function MarkovN() {
 
 
         }
-
-
         //assign first element to this.this.currentGram for next function//bad practice
 
-    }
+    };
 
 
     this.generate = function (noteList) {
