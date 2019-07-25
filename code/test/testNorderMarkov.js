@@ -121,7 +121,7 @@ describe('Markov_N-order_Algorithm', function () {
 
                     var notelist = [];
                     notelist.push("57,16,120");
-                    notelist.push("57,16,30");
+                    notelist.push("57,16,20");
                     notelist.push("57,16,30");
 
                     markov.order = 1;
@@ -159,6 +159,35 @@ describe('Markov_N-order_Algorithm', function () {
                 it(' generates Markov chain according to ruleset ', function () {
 
                     assert.equal(markov.markObj['57,16,120'], '57,16,30');
+                    assert.equal(markov.markObj['57,16,30'], '57,16,10');
+                    assert.equal(markov.markObj['57,16,10'], '57,16,120');
+
+                });
+
+
+            });
+        });
+        describe('Markov Chain Generation', function () {
+            describe('generate ', function () {
+                const markov = new NorderLib.MarkovN();
+                before(function () {
+
+                    var notelist = [];
+                    notelist.push("57,16,120");
+                    notelist.push("57,16,120");
+                    notelist.push("57,16,30");
+                    notelist.push("57,16,10");
+                    markov.order = 1;
+                    markov.markovLength = 64;
+                    markov.createMarkov(notelist);
+                    markov.generate();
+
+                });
+
+
+                it(' generates Markov chain that correctly handles duplicates', function () {
+
+                    assert.deepEqual(markov.markObj['57,16,120'], [ '57,16,120', '57,16,30' ]);
                     assert.equal(markov.markObj['57,16,30'], '57,16,10');
                     assert.equal(markov.markObj['57,16,10'], '57,16,120');
 

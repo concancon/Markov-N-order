@@ -13,24 +13,14 @@ NorderLib.MarkovN.prototype.outputResult = function() {
     outlet(0, markov.pitches);
     outlet(1, markov.velocities);
     outlet(2, markov.durations);
-}
+};
 
 
 
 var markov= new NorderLib.MarkovN();
 
 
-//var foobar = new Object();
 
-//object instance identifier will be printed via bang
-//all global code happens within context of that instance
-/*
-function bang() {
-	post('hola\n');
-	post(foobar);
-	post();
-}
-*/
 
 function list() {
     var a = arrayfromargs(arguments);
@@ -65,10 +55,6 @@ function callGenerateandOutput(){
 
 function setOrder(x){
     markov.order= x;
-}
-
-function setnstep(x){
-    markov.nstep= x;
 }
 
 function setMarkovLength(x){
