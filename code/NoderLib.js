@@ -9,10 +9,11 @@ function MarkovN() {
     this.order;
     this.markovLength;
 
+    //code adapted from Dan Schiffman's tutorial: github.com/codepadawan93/Text-Generator
+
     this.createMarkov = function (noteList) {
 
         //create an entry of size this.order
-
 
         for (var i = 0; i <= noteList.length - this.order; i++) {
 
@@ -27,26 +28,22 @@ function MarkovN() {
             }
 
 
-            //special case second to last and last elements lead to first
+            //special case "second" to last and last elements lead to first
             //push first element after last to create a loop
             if (i === (noteList.length - this.order)) {
 
-                //create last entry in table<<<this is overwriting this index
-                //this.markObj[(noteList.slice(noteList.length - (this.order)))] = [];
+                if (this.order === 1) {
+                    //if the order is 1 then simply put the first note after the last
+                    this.markObj[gram].push(noteList[0]);
 
-               if(this.order === 1){
-                  //if the order is 1 then simply put the first note after the last
-                   this.markObj[gram].push(noteList[0]);
-
-               }
-                else {
-
-                   this.markObj[gram].push(noteList[0]);
-                   for (var r = 0; r < this.order - 1; r++) {
-                       this.markObj[(noteList.slice(noteList.length - (this.order - (r + 1))).concat(noteList.slice(0, (r + 1))))] = [];
-                       this.markObj[(noteList.slice(noteList.length - (this.order - (r + 1))).concat(noteList.slice(0, (r + 1))))].push(noteList[r + 1]);
-                   }
-               }
+                } else {
+                    //create necessary number of entries to loop over end of user input
+                    this.markObj[gram].push(noteList[0]);
+                    for (var r = 0; r < this.order - 1; r++) {
+                        this.markObj[(noteList.slice(noteList.length - (this.order - (r + 1))).concat(noteList.slice(0, (r + 1))))] = [];
+                        this.markObj[(noteList.slice(noteList.length - (this.order - (r + 1))).concat(noteList.slice(0, (r + 1))))].push(noteList[r + 1]);
+                    }
+                }
 
             } else {
                 this.markObj[gram].push(noteList[i + this.order]);
@@ -55,11 +52,6 @@ function MarkovN() {
 
 
         }
-
-   /*     for (var key in this.markObj) {
-            post("key: " + key + "value: " + this.markObj[key]);
-            post();
-        }*/
 
 
     };
