@@ -8,17 +8,20 @@ var myval = [];
 
 var seqtowrite;
 
-NorderLib.MarkovN.prototype.outputResult = function() {
 
-    outlet(0, markov.pitches);
-    outlet(1, markov.velocities);
-    outlet(2, markov.durations);
-};
+
+
 
 
 
 var markov= new NorderLib.MarkovN();
 
+function outputResult(markov){
+
+    outlet(0, markov.getPitches());
+    outlet(1, markov.getVelocities());
+    outlet(2, markov.getDurations());
+}
 
 
 
@@ -30,13 +33,8 @@ function list() {
 
 
 function clear() {
-    markov.markObj = {};
     myval = [];
-    markov.result = [];
-    markov.pitches= [];
-    markov.velocities = [];
-    markov.durations = [];
-
+    markov.clear();
 }
 
 function callCreate() {
@@ -48,17 +46,17 @@ function callCreate() {
 function callGenerateandOutput(){
 
     markov.generate(myval);
-    markov.outputResult();
+    outputResult(markov);
 }
 
 
 
 function setOrder(x){
-    markov.order= x;
+    markov.setOrder(x);
 }
 
 function setMarkovLength(x){
-    markov.markovLength= x;
+    markov.setMarkovLength(x);
 
 }
 

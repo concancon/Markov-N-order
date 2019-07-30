@@ -95,14 +95,43 @@ function MarkovN() {
         }
 
 
-    }
+    };
 
     this.getMarkObjLength = function () {
 
         return Object.keys(this.markObj).length;
-    }
+    };
 
+    this.getPitches= function () {
 
+        return this.pitches;
+    };
+
+    this.getVelocities = function() {
+
+        return this.velocities;
+    };
+
+    this.getDurations = function () {
+        return this.durations;
+    };
+
+    this.setOrder = function(x){
+        this.order = x;
+
+    };
+    this.setMarkovLength= function(x) {
+
+        this.markovLength= x;
+    };
+    this.clear= function () {
+
+        this.markObj = {};
+        this.result = [];
+        this.pitches= [];
+        this.velocities = [];
+        this.durations = [];
+    };
 }
 
 
