@@ -1,16 +1,76 @@
+/**
+ * a constructor for an n order Markov Chain
+ * @constructor
+ * @name MultiMarkov
+ *
+ **/
 function MarkovN() {
-
+    /**
+     * Object used to build a Markov chain
+     @name markObj
+     @type object
+     *
+     **/
     this.markObj = {};
+    /**
+     * result after applying markov chain
+     @name result
+     @type string
+     *
+     **/
     this.result = [];
+    /**
+     * holds pitch data
+     @name pitches
+     @type string
+     *
+     **/
     this.pitches = [];
+    /**
+     * holds velocity data
+     @name velocities
+     @type string
+     *
+     **/
     this.velocities = [];
+    /**
+     * holds duration data
+     @name durations
+     @type string
+     *
+     **/
     this.durations = [];
+    /**
+     * entry in Markov Object used to find possible successors
+     @name currentGram
+     @type string
+     *
+     **/
     this.currentGram = [];
+    /**
+     * specifies order of the markov chain to be created
+     @name order
+     @type number
+     *
+     **/
     this.order;
+    /**
+     * desired length for generated markov chain
+     @name markovLength
+     @type number
+     *
+     **/
     this.markovLength;
 
-    //code adapted from Dan Schiffman's tutorial: github.com/codepadawan93/Text-Generator
 
+    /**
+     * parses input from live.step object and creates a markov object out of it.
+     * every unique value is a key whose values are its possible succesors
+     * code adapted from Dan Schiffman's tutorial: github.com/codepadawan93/Text-Generator
+     * @function
+     * @name createMarkov
+     * @param {array} noteList a list of notes to use as input for the Markov Chain
+     **/
     this.createMarkov = function (noteList) {
 
         //create an entry of size this.order
@@ -56,7 +116,12 @@ function MarkovN() {
 
     };
 
-
+    /**
+     * creates a Markov chain according to the order of notes input by the user and of length specified by markovLength variable.
+     * @function
+     * @name generate
+     *
+     **/
     this.generate = function (noteList) {
 
         //get the first index of markObj
@@ -97,33 +162,75 @@ function MarkovN() {
 
     };
 
+    /**
+     * a getter function for the length or number of entries in markovObj
+     * @function
+     * @name getMarkObjLength
+     * @returns {number} the length of the markov Object.
+     **/
     this.getMarkObjLength = function () {
 
         return Object.keys(this.markObj).length;
     };
-
+    /**
+     * a getter function for an entry in the pitches array
+     * @function
+     * @name getPitches
+     * @param {number} index of desired entry in pitches
+     * @returns {string} desired entry in pitches
+     **/
     this.getPitches= function () {
 
         return this.pitches;
     };
-
+    /**
+     * a getter function for an entry in the velocity array
+     * @function
+     * @name getVelocities
+     * @param {number} index of desired entry in velocities
+     * @returns {string} desired entry in velocities
+     **/
     this.getVelocities = function() {
 
         return this.velocities;
     };
-
+    /**
+     * a getter function for an entry in the duration array
+     * @function
+     * @name getDurations
+     * @param {number} index of desired entry in durations
+     * @returns {string} desired entry in durations
+     **/
     this.getDurations = function () {
         return this.durations;
     };
-
+    /**
+     * a setter function for the order of the markov chain
+     * @function
+     * @name setOrder
+     * @param {number} desired Markov chain order
+     **/
     this.setOrder = function(x){
         this.order = x;
 
     };
+
+    /**
+     * a setter function for the length of the markov chain
+     * @function
+     * @name setMarkovLength
+     * @param {number} desired Markov chain length
+     **/
     this.setMarkovLength= function(x) {
 
         this.markovLength= x;
     };
+    /**
+     * clears all markov chains contents and properties
+     * @function
+     * @name clear
+     *
+     **/
     this.clear= function () {
 
         this.markObj = {};
